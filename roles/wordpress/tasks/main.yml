@@ -38,13 +38,30 @@
     creates: index.php
 
 - name: Set up wp-config.php to stating environment
-  command: "wp core config --dbname={{ lookup('env', 'STAGING_DB_NAME') }} --dbuser={{ lookup('env', 'STAGING_DB_USER') }} --dbpass={{ lookup('env', 'STAGING_DB_PASS') }} --dbhost={{ lookup('env', 'STAGING_DB_HOST') }}"
+  command: "wp config create --dbname={{ lookup('env', 'STAGING_DB_NAME') }} --dbuser={{ lookup('env', 'STAGING_DB_USER') }} --dbpass={{ lookup('env', 'STAGING_DB_PASS') }} --dbhost={{ lookup('env', 'STAGING_DB_HOST') }}"
   args:
     chdir: "{{ lookup('env', 'STAGING_DIRECTORY') }}"
     creates: wp-config.php
 
 - name: Install WordPress to stating environment
   command: "wp core install --url='{{staging_url}}' --title='{{staging_title}}' --admin_user='{{ lookup('env', 'STAGING_ADMIN_NAME') }}' --admin_password='{{ lookup('env', 'STAGING_ADMIN_PASS') }}' --admin_email='{{ lookup('env', 'STAGING_ADMIN_MAIL') }}'"
+  args:
+    chdir: "{{ lookup('env', 'STAGING_DIRECTORY') }}"
+
+- name: Install common plugins to staging environment
+  command: "wp plugin install {{ item }} --activate"
+  args:
+    chdir: "{{ lookup('env', 'STAGING_DIRECTORY') }}"
+  with_items: "{{ common_plugins }}"
+
+- name: Install staging plugins to staging environment
+  command: "wp plugin install {{ item }} --activate"
+  args:
+    chdir: "{{ lookup('env', 'STAGING_DIRECTORY') }}"
+  with_items: "{{ staging_plugins }}"
+
+- name: Rewrite permalink structure
+  command: "wp rewrite flush"
   args:
     chdir: "{{ lookup('env', 'STAGING_DIRECTORY') }}"
 
@@ -60,12 +77,29 @@
     creates: index.php
 
 - name: Set up wp-config.php to production environment
-  command: "wp core config --dbname={{ lookup('env', 'PRODUCTION_DB_NAME') }} --dbuser={{ lookup('env', 'PRODUCTION_DB_USER') }} --dbpass={{ lookup('env', 'PRODUCTION_DB_PASS') }} --dbhost={{ lookup('env', 'PRODUCTION_DB_HOST') }}"
+  command: "wp config create --dbname={{ lookup('env', 'PRODUCTION_DB_NAME') }} --dbuser={{ lookup('env', 'PRODUCTION_DB_USER') }} --dbpass={{ lookup('env', 'PRODUCTION_DB_PASS') }} --dbhost={{ lookup('env', 'PRODUCTION_DB_HOST') }}"
   args:
     chdir: "{{ lookup('env', 'PRODUCTION_DIRECTORY') }}"
     creates: wp-config.php
 
 - name: Install WordPress to production environment
   command: "wp core install --url='{{production_url}}' --title='{{production_title}}' --admin_user='{{ lookup('env', 'PRODUCTION_ADMIN_NAME') }}' --admin_password='{{ lookup('env', 'PRODUCTION_ADMIN_PASS') }}' --admin_email='{{ lookup('env', 'PRODUCTION_ADMIN_MAIL') }}'"
+  args:
+    chdir: "{{ lookup('env', 'PRODUCTION_DIRECTORY') }}"
+
+- name: Install common plugins to production environment
+  command: "wp plugin install {{ item }} --activate"
+  args:
+    chdir: "{{ lookup('env', 'PRODUCTION_DIRECTORY') }}"
+  with_items: "{{ common_plugins }}"
+
+- name: Install staging plugins to production environment
+  command: "wp plugin install {{ item }} --activate"
+  args:
+    chdir: "{{ lookup('env', 'PRODUCTION_DIRECTORY') }}"
+  with_items: "{{ production_plugins }}"
+
+- name: Rewrite permalink structure
+  command: "wp rewrite flush"
   args:
     chdir: "{{ lookup('env', 'PRODUCTION_DIRECTORY') }}"

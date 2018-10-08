@@ -46,21 +46,28 @@ direnv の利用を推奨します。
 
 ```
 # ステージング環境の環境変数
-export STAGING_DB_HOST="staging_db_host_here"
-export STAGING_DB_USER="staging_db_user_name_here"
-export STAGING_DB_NAME="staging_db_name_here"
-export STAGING_DB_PASS="staging_db_pass_here"
-export STAGING_DIRECTORY="staging_directory_here"
+# ステージング環境の環境変数
+export STAGING_DB_HOST=""
+export STAGING_DB_USER=""
+export STAGING_DB_NAME=""
+export STAGING_DB_PASS=""
+export STAGING_DIRECTORY="~/www/staging"
+export STAGING_ADMIN_NAME=""
+export STAGING_ADMIN_PASS=""
+export STAGING_ADMIN_MAIL="test@example.com"
 
 # 本番環境の環境変数
-export PRODUCTION_DB_HOST="production_db_host_here"
-export PRODUCTION_DB_USER="production_db_user_name_here"
-export PRODUCTION_DB_NAME="production_db_name_here"
-export PRODUCTION_DB_PASS="production_db_pass_here"
-export PRODUCTION_DIRECTORY="production_directory_here"
+export PRODUCTION_DB_HOST=""
+export PRODUCTION_DB_USER=""
+export PRODUCTION_DB_NAME=""
+export PRODUCTION_DB_PASS=""
+export PRODUCTION_DIRECTORY="~/www/production"
+export PRODUCTION_ADMIN_NAME=""
+export PRODUCTION_ADMIN_PASS=""
+export PRODUCTION_ADMIN_MAIL="test@example.com"
 
-# ssh接続用の環境変数
-export SAKURA_SSH_PASS="enter_sakura_server_ftp_pass"
-export SAKURA_HOST_NAME="enter_yourhost_name"
-export SAKURA_USER_NAME="enter_your_user_name"
+export SAKURA_SSH_PASS=""
+export SAKURA_HOST_NAME=""
+export SAKURA_USER_NAME=""
+
 ```
