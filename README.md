@@ -34,7 +34,7 @@ homebrew で ansible をインストールしてください
 - `ansible-playbook playbook.yml`
 
 ## 環境変数
-
+DB情報やログイン情報は環境変数に入っているもののみ扱えます。
 direnv の利用を推奨します。
 .envrc のあるディレクトリでのみ環境変数が有効となり、ディレクトリを移動すると環境変数を参照できなくなるもので、センシティブな情報を管理するのに適しています。
 
@@ -45,7 +45,6 @@ direnv の利用を推奨します。
 .envrc の中身は以下のように記述します。
 
 ```
-# ステージング環境の環境変数
 # ステージング環境の環境変数
 export STAGING_DB_HOST=""
 export STAGING_DB_USER=""
