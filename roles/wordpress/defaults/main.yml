@@ -26,3 +26,4 @@ common_plugins:
   - broken-link-checker
   - wordpress-importer
   - all-in-one-wp-migration
+  - sakura-rs-wp-ssl
