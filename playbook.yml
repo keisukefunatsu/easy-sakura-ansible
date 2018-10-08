@@ -1,0 +1,5 @@
+- name:
+  hosts: sakura_rental_server
+  become: no
+  roles:
+    - role: wordpress

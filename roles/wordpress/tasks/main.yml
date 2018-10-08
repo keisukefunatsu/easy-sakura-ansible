@@ -1,0 +1,50 @@
+- name: Create bin directory
+  file:
+    path: ~/bin
+    state: directory
+- name: Install wp-cli
+  get_url:
+    url: https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+    dest: ~/bin/wp
+    mode: "0755"
+- name: wp-cli info
+  command: "wp --info"
+  register: wp_info_result
+
+- name: Display wp-cli info
+  debug:
+    msg: "{{ wp_info_result }}"
+
+- name: Create wp-cli config directory
+  file:
+    path: ~/.wp-cli
+    state: directory
+
+- name: Create wp-cli config file
+  file:
+    path: ~/.wp-cli/config.yml
+    state: file
+    mode: "755"
+
+- name: Create staging directory
+  file:
+    path: "{{ lookup('env', 'STAGING_DIRECTORY') }}"
+    state: directory
+
+- name: Install WordPress to stating environment
+  command: "wp core download --locale=ja"
+  args:
+    chdir: "{{ lookup('env', 'STAGING_DIRECTORY') }}"
+    # index.phpがあればスキップされる
+    creates: index.php
+
+- name: Set up wp-config.php to stating environment
+  command: "wp core config --dbname={{ lookup('env', 'STAGING_DB_NAME') }} --dbuser={{ lookup('env', 'STAGING_DB_USER') }} --dbpass={{ lookup('env', 'STAGING_DB_PASS') }} --dbhost={{ lookup('env', 'STAGING_DB_HOST') }}"
+  args:
+    chdir: "{{ lookup('env', 'STAGING_DIRECTORY') }}"
+    creates: wp-config.php
+
+- name: Install WordPress to stating environment
+  command: "wp core install --url='{{staging_url}}' --title='{{staging_title}}' --admin_user='{{ lookup('env', 'STAGING_ADMIN_NAME') }}' --admin_password='{{ lookup('env', 'STAGING_ADMIN_PASS') }}' --admin_email='{{ lookup('env', 'STAGING_ADMIN_MAIL') }}'"
+  args:
+    chdir: "{{ lookup('env', 'STAGING_DIRECTORY') }}"
