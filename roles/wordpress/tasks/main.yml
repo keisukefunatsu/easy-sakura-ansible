@@ -39,7 +39,7 @@
 
 - name: Set up wp-config.php to stating environment
   command: |
-    wp config create --dbname={{ lookup('env', 'STAGING_DB_NAME') }} --dbuser={{ lookup('env', 'STAGING_DB_USER') }} --dbpass={{ lookup('env', 'STAGING_DB_PASS') }} --dbhost={{ lookup('env', 'STAGING_DB_HOST') }}
+    wp config create --dbname={{ lookup('env', 'STAGING_DB_NAME') }} --dbuser={{ lookup('env', 'DB_USER') }} --dbpass={{ lookup('env', 'DB_PASS') }} --dbhost={{ lookup('env', 'DB_HOST') }}
     --extra-php="define( 'WP_DEBUG', true );
     define( 'WP_DEBUG_LOG', true );
     define('DISALLOW_FILE_EDIT',true);"
@@ -82,7 +82,7 @@
 
 - name: Set up wp-config.php to production environment
   command: |
-    wp config create --dbname={{ lookup('env', 'PRODUCTION_DB_NAME') }} --dbuser={{ lookup('env', 'PRODUCTION_DB_USER') }} --dbpass={{ lookup('env', 'PRODUCTION_DB_PASS') }} --dbhost={{ lookup('env', 'PRODUCTION_DB_HOST') }}
+    wp config create --dbname={{ lookup('env', 'PRODUCTION_DB_NAME') }} --dbuser={{ lookup('env', 'DB_USER') }} --dbpass={{ lookup('env', 'DB_PASS') }} --dbhost={{ lookup('env', 'DB_HOST') }}
     --extra-php="define('DISALLOW_FILE_EDIT',true);"
   args:
     chdir: "{{ lookup('env', 'PRODUCTION_DIRECTORY') }}"

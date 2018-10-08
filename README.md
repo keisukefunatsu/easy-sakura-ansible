@@ -45,21 +45,20 @@ direnv の利用を推奨します。
 .envrc の中身は以下のように記述します。
 
 ```
+# 共通の環境変数
+export DB_USER=""
+export DB_PASS=""
+export DB_HOST=""
+
 # ステージング環境の環境変数
-export STAGING_DB_HOST=""
-export STAGING_DB_USER=""
 export STAGING_DB_NAME=""
-export STAGING_DB_PASS=""
 export STAGING_DIRECTORY="~/www/staging"
 export STAGING_ADMIN_NAME=""
 export STAGING_ADMIN_PASS=""
 export STAGING_ADMIN_MAIL="test@example.com"
 
 # 本番環境の環境変数
-export PRODUCTION_DB_HOST=""
-export PRODUCTION_DB_USER=""
 export PRODUCTION_DB_NAME=""
-export PRODUCTION_DB_PASS=""
 export PRODUCTION_DIRECTORY="~/www/production"
 export PRODUCTION_ADMIN_NAME=""
 export PRODUCTION_ADMIN_PASS=""
