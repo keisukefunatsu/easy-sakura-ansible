@@ -1,6 +1,5 @@
-
 # 本番環境の設定
-production_url: "http://keisuke-funatsu.sakura.ne.jp/production"
+production_url: "https://example.com"
 production_title: "WordPress　demo site production"
 production_plugins:
   - google-sitemap-generator
@@ -8,11 +7,10 @@ production_plugins:
 
 # ステージング環境の設定
 is_staging_necessary: true
-staging_url: "http://keisuke-funatsu.sakura.ne.jp/staging"
+staging_url: "http://xxxx.sakura.ne.jp/staging"
 staging_title: "WordPress　demo site staging"
 staging_plugins:
   - show-current-template
-
 
 # 両方の環境に入るプラグイン
 common_plugins:
