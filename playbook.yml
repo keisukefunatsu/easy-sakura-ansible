@@ -1,5 +1,7 @@
 - name:
   hosts: sakura_rental_server
   become: no
+  vars_files:
+    - vars.yml
   roles:
     - role: wordpress

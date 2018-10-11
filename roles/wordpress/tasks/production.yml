@@ -1,0 +1,40 @@
+- name: Create production directory
+  file:
+    path: "{{ lookup('env', 'PRODUCTION_DIRECTORY') }}"
+    state: directory
+
+- name: Download WordPress to production environment
+  command: "wp core download --locale=ja"
+  args:
+    chdir: "{{ lookup('env', 'PRODUCTION_DIRECTORY') }}"
+    creates: index.php
+
+- name: Set up wp-config.php to production environment
+  command: |
+    wp config create --dbname={{ lookup('env', 'PRODUCTION_DB_NAME') }} --dbuser={{ lookup('env', 'DB_USER') }} --dbpass={{ lookup('env', 'DB_PASS') }} --dbhost={{ lookup('env', 'DB_HOST') }}
+    --extra-php="define('DISALLOW_FILE_EDIT',true);"
+  args:
+    chdir: "{{ lookup('env', 'PRODUCTION_DIRECTORY') }}"
+    creates: wp-config.php
+
+- name: Install WordPress to production environment
+  command: "wp core install --url='{{production_url}}' --title='{{production_title}}' --admin_user='{{ lookup('env', 'PRODUCTION_ADMIN_NAME') }}' --admin_password='{{ lookup('env', 'PRODUCTION_ADMIN_PASS') }}' --admin_email='{{ lookup('env', 'PRODUCTION_ADMIN_MAIL') }}'"
+  args:
+    chdir: "{{ lookup('env', 'PRODUCTION_DIRECTORY') }}"
+
+- name: Install common plugins to production environment
+  command: "wp plugin install {{ item }} --activate"
+  args:
+    chdir: "{{ lookup('env', 'PRODUCTION_DIRECTORY') }}"
+  with_items: "{{ common_plugins }}"
+
+- name: Install staging plugins to production environment
+  command: "wp plugin install {{ item }} --activate"
+  args:
+    chdir: "{{ lookup('env', 'PRODUCTION_DIRECTORY') }}"
+  with_items: "{{ production_plugins }}"
+
+- name: Rewrite permalink structure
+  command: "wp rewrite flush"
+  args:
+    chdir: "{{ lookup('env', 'PRODUCTION_DIRECTORY') }}"

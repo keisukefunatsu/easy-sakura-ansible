@@ -1,0 +1,27 @@
+- name: Create bin directory
+  file:
+    path: ~/bin
+    state: directory
+- name: Install wp-cli
+  get_url:
+    url: https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+    dest: ~/bin/wp
+    mode: "0755"
+- name: wp-cli info
+  command: "wp --info"
+  register: wp_info_result
+
+- name: Display wp-cli info
+  debug:
+    msg: "{{ wp_info_result }}"
+
+- name: Create wp-cli config directory
+  file:
+    path: ~/.wp-cli
+    state: directory
+
+- name: Create wp-cli config file
+  file:
+    path: ~/.wp-cli/config.yml
+    state: file
+    mode: "755"
