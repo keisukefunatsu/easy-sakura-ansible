@@ -1,19 +1,19 @@
+
+# ステージング環境の設定
 staging_url: "http://keisuke-funatsu.sakura.ne.jp/staging"
-
 staging_title: "WordPress　demo site staging"
-
 staging_plugins:
   - show-current-template
 
+# 本番環境の設定
 production_url: "http://keisuke-funatsu.sakura.ne.jp/production"
-
 production_title: "WordPress　demo site production"
-
 production_plugins:
-  - all-in-one-seo-pack
   - google-sitemap-generator
   - walti
 
+# 両方の環境に入るプラグイン
+# 必要なプラグインを同様の形式で追記してください
 common_plugins:
   - all-in-one-wp-security-and-firewall
   - contact-form-7
@@ -27,3 +27,5 @@ common_plugins:
   - wordpress-importer
   - all-in-one-wp-migration
   - sakura-rs-wp-ssl
+  - all-in-one-seo-pack
+# - other-plugin-name-here
