@@ -45,7 +45,13 @@
     chdir: "~/www/{{ working_directory }}"
   with_items: "{{ site_plugins }}"
 
+
 - name: Rewrite permalink structure
-  command: "wp rewrite flush"
+  command: wp rewrite structure '/%postname%/'
+  args:
+    chdir: "~/www/{{ working_directory }}"
+
+- name: Flush permalink structure
+  command: wp rewrite flush
   args:
     chdir: "~/www/{{ working_directory }}"
