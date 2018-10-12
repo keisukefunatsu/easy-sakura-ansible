@@ -16,6 +16,16 @@ windows 版はこちら
 
 - https://docs.ansible.com/ansible/latest/user_guide/windows.html
 
+## 仕様、できること
+- WP-CLIが使えるようになります。
+- 本番環境、ステージング環境ともにディレクトリはwww以下に作られます。
+- バックアップ、アップデートスクリプトの設置、cron設定が可能です。
+- テストデータの挿入が可能です。
+- 予め決めておいたプラグインを構築と同時に導入できます。
+  - プラグインは本番環境、ステージング環境、両方に共通のものの３種類に分けて設定することができます。
+- 変数はconfig.ymlを別途作成して記入します。config-sample.ymlをリネームするなどして使ってください。
+
+
 ## 準備
 
 homebrew で ansible をインストールしてください
@@ -47,7 +57,7 @@ config-sample.yml を config.yml にリネームして使用してください�
 - `.gitignore`の中の`config.yml`を削除
 - `ansible-vault encrypt config.yml`を実行し、パスワードを入力して暗号化した後push
 
-## 参考ディレクトリ
+## 参考リポジトリ
 
 - https://github.com/youcune/wordpress-ansible-sakura
 - https://github.com/wate/tools/tree/master/sakura_rentalserver

@@ -9,7 +9,7 @@
     chdir: "~/www/{{ staging_directory }}"
     creates: index.php
 
-- name: Set up wp-config.php to stating environment
+- name: Set up wp-config.php for stating environment
   command: |
     wp config create
     --dbname={{ staging_db_name }}
@@ -23,7 +23,7 @@
     chdir: "~/www/{{ staging_directory }}"
     creates: wp-config.php
 
-- name: Install WordPress to stating environment
+- name: Install WordPress on stating environment
   command:
     wp core install
     --url='{{staging_url}}'
@@ -34,13 +34,19 @@
   args:
     chdir: "~/www/{{ staging_directory }}"
 
-- name: Install common plugins to staging environment
+- name: Install WordPress Importer plugin on staging environment
+  command: "wp plugin install wordpress-importer --activate"
+  args:
+    chdir: "~/www/{{ staging_directory }}"
+  when: import_test_data
+
+- name: Install common plugins on staging environment
   command: "wp plugin install {{ item }} --activate"
   args:
     chdir: "~/www/{{ staging_directory }}"
   with_items: "{{ common_plugins }}"
 
-- name: Install staging plugins to staging environment
+- name: Install staging plugins on staging environment
   command: "wp plugin install {{ item }} --activate"
   args:
     chdir: "~/www/{{ staging_directory }}"

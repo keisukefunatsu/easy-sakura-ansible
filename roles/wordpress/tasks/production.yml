@@ -9,7 +9,7 @@
     chdir: "~/www/{{ production_directory }}"
     creates: index.php
 
-- name: Set up wp-config.php to production environment
+- name: Set up wp-config.php for production environment
   command: |
     wp config create
     --dbname={{ production_db_name }}
@@ -21,7 +21,7 @@
     chdir: "~/www/{{ production_directory }}"
     creates: wp-config.php
 
-- name: Install WordPress to production environment
+- name: Install WordPress on production environment
   command: |
     wp core install
     --url='{{production_url}}'
@@ -32,13 +32,13 @@
   args:
     chdir: "~/www/{{ production_directory }}"
 
-- name: Install common plugins to production environment
+- name: Install common plugins on production environment
   command: "wp plugin install {{ item }} --activate"
   args:
     chdir: "~/www/{{ production_directory }}"
   with_items: "{{ common_plugins }}"
 
-- name: Install staging plugins to production environment
+- name: Install staging plugins on production environment
   command: "wp plugin install {{ item }} --activate"
   args:
     chdir: "~/www/{{ production_directory }}"
