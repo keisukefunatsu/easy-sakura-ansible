@@ -1,44 +1,34 @@
+# 共通の設定
+sakura_ssh_pass: "enter-ftp_pass"
+sakura_host_name: "username.sakura.ne.jp"
+sakura_user_name: "enter_sakura_user_name"
+sakura_db_host: "mysqlxxx.db.sakura.ne.jp"
+sakura_db_user: "enter_sakura_db_user"
+sakura_db_pass: "enter_sakura_db_pass"
+
 # 本番環境の設定
-production_url: "http://xxxx.sakura.ne.jp/production"
+production_db_name: "db_production"
+production_directory: "~/www/production"
+# 以下はWordPressの設定項目
+production_admin_name: "enter_strong_admin_name"
+production_admin_pass: "enter_strong_admin_pass"
+production_admin_mail: "test@example.com"
+production_url: "https://easy-ansible-sakura.tk/"
 production_title: "WordPress　demo site production"
 production_plugins: []
-
 # ステージング環境の設定
-is_staging_necessary: false
+# ステージング環境が必要な場合は true, 必要でない場合はfalse
+is_staging_necessary: true
+staging_db_name: "db_staging"
+staging_directory: "~/www/staging"
+# 以下はWordPressの設定項目
+staging_admin_name: "enter_strong_admin_name"
+staging_admin_pass: "enter_strong_admin_pass"
+staging_admin_mail: "test@example.com"
 staging_url: "http://xxxx.sakura.ne.jp/staging"
 staging_title: "WordPress　demo site staging"
 staging_plugins: []
 
-# 両方の環境に入るプラグイン
-common_plugins:
-  []
-  # # 本番環境の設定
-# production_url: "http://keisuke-funatsu.sakura.ne.jp/production"
-# production_title: "WordPress　demo site production"
-# production_plugins:
-#   - google-sitemap-generator
-#   - walti
-#
-# # ステージング環境の設定
-# is_staging_necessary: true
-# staging_url: "http://keisuke-funatsu.sakura.ne.jp/staging"
-# staging_title: "WordPress　demo site staging"
-# staging_plugins:
-#   - show-current-template
-#
-#
-# # 両方の環境に入るプラグイン
-# common_plugins:
-#   - all-in-one-wp-security-and-firewall
-#   - contact-form-7
-#   - flamingo
-#   - cf7-invisible-recaptcha
-#   - tinymce-advanced
-#   - wp-mail-smtp
-#   - wp-multibyte-patch
-#   - wp-total-hacks
-#   - broken-link-checker
-#   - wordpress-importer
-#   - all-in-one-wp-migration
-#   - sakura-rs-wp-ssl
-#   - all-in-one-seo-pack
+
+# 本番、ステージング両方の環境に入るプラグイン
+common_plugins: []
