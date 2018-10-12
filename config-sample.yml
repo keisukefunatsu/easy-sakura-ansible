@@ -6,6 +6,11 @@ sakura_db_host: "mysqlxxx.db.sakura.ne.jp"
 sakura_db_user: "enter_sakura_db_user"
 sakura_db_pass: "enter_sakura_db_pass"
 
+# cronの実行時間を設定（オプション）
+cron_hour: 0
+cron_minute: 30
+cron_enable: true
+
 # 本番環境の設定
 production_db_name: "db_production"
 production_directory: "production"

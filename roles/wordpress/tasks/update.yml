@@ -2,3 +2,12 @@
   template:
     src: update.sh.j2
     dest: ~/bin/update.sh
+
+
+- name: Set cron
+  cron:
+    name: "Update WordPress"
+    hour: "{{ cron_hour }}"
+    minute: "{{ cron_minute }}"
+    state: "{{ 'present' if cron_enable else 'absent' }}"
+    job: ~/bin/update.sh
