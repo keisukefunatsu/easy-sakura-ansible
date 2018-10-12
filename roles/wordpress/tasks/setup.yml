@@ -1,0 +1,51 @@
+- name: Create working directory
+  file:
+    path: "~/www/{{ working_directory }}"
+    state: directory
+
+- name: Download WordPress to environment
+  command: "wp core download --locale=ja"
+  args:
+    chdir: "~/www/{{ working_directory }}"
+    creates: index.php
+
+- name: Set up wp-config.php for environment
+  command: |
+    wp config create
+    --dbname={{ site_db_name }}
+    --dbuser={{ sakura_db_user }}
+    --dbpass={{ sakura_db_pass }}
+    --dbhost={{ sakura_db_host }}
+    --dbprefix={{ site_db_prefix | default('wp_') }}
+    --extra-php="{{ extra_php }}"
+  args:
+    chdir: "~/www/{{ working_directory }}"
+    creates: wp-config.php
+
+- name: Install WordPress on environment
+  command: |
+    wp core install
+    --url='{{ site_url }}'
+    --title='{{ site_title }}'
+    --admin_user='{{ site_admin_name }}'
+    --admin_password='{{ site_admin_pass }}'
+    --admin_email='{{ site_admin_mail }}'
+  args:
+    chdir: "~/www/{{ working_directory }}"
+
+- name: Install common plugins on environment
+  command: "wp plugin install {{ item }} --activate"
+  args:
+    chdir: "~/www/{{ working_directory }}"
+  with_items: "{{ common_plugins }}"
+
+- name: Install plugins on environment
+  command: "wp plugin install {{ item }} --activate"
+  args:
+    chdir: "~/www/{{ working_directory }}"
+  with_items: "{{ site_plugins }}"
+
+- name: Rewrite permalink structure
+  command: "wp rewrite flush"
+  args:
+    chdir: "~/www/{{ working_directory }}"

@@ -2,10 +2,35 @@
   import_tasks: wp-cli.yml
 
 - name: Set up Production
-  import_tasks: production.yml
+  import_tasks: setup.yml
+  vars:
+    working_directory: "{{ production_directory }}"
+    site_db_name: "{{ production_db_name }}"
+    site_db_prefix: "{{ production_db_prefix }}"
+    site_url: "{{ production_url }}"
+    site_title: "{{ production_title }}"
+    site_admin_name: "{{ production_admin_name }}"
+    site_admin_pass: "{{ production_admin_pass }}"
+    site_admin_mail: "{{ production_admin_mail }}"
+    site_plugins: "{{ production_plugins }}"
+    extra_php: "define( 'DISALLOW_FILE_EDIT',true );"
 
 - name: Set up Staging
-  import_tasks: staging.yml
+  import_tasks: setup.yml
+  vars:
+    working_directory: "{{ staging_directory }}"
+    site_db_name: "{{ staging_db_name }}"
+    site_db_prefix: "{{ staging_db_prefix }}"
+    site_url: "{{ staging_url }}"
+    site_title: "{{ staging_title }}"
+    site_admin_name: "{{ staging_admin_name }}"
+    site_admin_pass: "{{ staging_admin_pass }}"
+    site_admin_mail: "{{ staging_admin_mail }}"
+    site_plugins: "{{ staging_plugins }}"
+    extra_php: |
+      define( 'WP_DEBUG', true );
+      define( 'WP_DEBUG_LOG', true );
+      define( 'DISALLOW_FILE_EDIT',true );
   when: is_staging_necessary
 
 - name: Import test data to staging

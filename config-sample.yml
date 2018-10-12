@@ -14,8 +14,11 @@ cron_minute: 30
 cron_enable: true
 
 # 本番環境の設定
-production_db_name: "db_production"
 production_directory: "production"
+production_db_name: "db_production"
+# オプション
+production_db_prefix: "wp_pro_"
+
 
 # 以下はWordPressの設定項目
 production_admin_name: "enter_strong_admin_name"
@@ -32,8 +35,10 @@ production_plugins:
 is_staging_necessary: true
 # ステージング環境にテストデータをインポートする場合
 staging_test_data: true
-staging_db_name: "db_staging"
 staging_directory: "staging"
+staging_db_name: "db_staging"
+# オプション
+staging_db_prefix: "wp_stg_"
 
 # 以下はWordPressの設定項目
 staging_admin_name: "enter_strong_admin_name"
@@ -43,7 +48,6 @@ staging_url: "http://xxxx.sakura.ne.jp/staging"
 staging_title: "WordPress　demo site staging"
 staging_plugins:
   - show-current-template
-
 
 # 本番、ステージング両方の環境に入るプラグイン
 common_plugins:
