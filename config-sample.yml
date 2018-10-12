@@ -8,7 +8,7 @@ sakura_db_pass: "enter_sakura_db_pass"
 
 # 本番環境の設定
 production_db_name: "db_production"
-production_directory: "~/www/production"
+production_directory: "production"
 # 以下はWordPressの設定項目
 production_admin_name: "enter_strong_admin_name"
 production_admin_pass: "enter_strong_admin_pass"
@@ -23,7 +23,7 @@ production_plugins:
 # ステージング環境が必要な場合は true, 必要でない場合はfalse
 is_staging_necessary: true
 staging_db_name: "db_staging"
-staging_directory: "~/www/staging"
+staging_directory: "staging"
 # 以下はWordPressの設定項目
 staging_admin_name: "enter_strong_admin_name"
 staging_admin_pass: "enter_strong_admin_pass"

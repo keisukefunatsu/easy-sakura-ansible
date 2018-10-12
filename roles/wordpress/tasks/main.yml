@@ -7,3 +7,9 @@
 - name: Set up Staging
   import_tasks: staging.yml
   when: is_staging_necessary
+
+- name: Set up backup job
+  import_tasks: backup.yml
+
+- name: Set up update job
+  import_tasks: update.yml

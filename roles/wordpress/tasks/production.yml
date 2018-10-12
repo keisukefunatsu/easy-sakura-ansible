@@ -1,12 +1,12 @@
 - name: Create production directory
   file:
-    path: "{{ production_directory }}"
+    path: "~/www/{{ production_directory }}"
     state: directory
 
 - name: Download WordPress to production environment
   command: "wp core download --locale=ja"
   args:
-    chdir: "{{ production_directory }}"
+    chdir: "~/www/{{ production_directory }}"
     creates: index.php
 
 - name: Set up wp-config.php to production environment
@@ -18,7 +18,7 @@
     --dbhost={{ sakura_db_host }}
     --extra-php="define('DISALLOW_FILE_EDIT',true);"
   args:
-    chdir: "{{ production_directory }}"
+    chdir: "~/www/{{ production_directory }}"
     creates: wp-config.php
 
 - name: Install WordPress to production environment
@@ -30,21 +30,21 @@
     --admin_password='{{ production_admin_pass }}'
     --admin_email='{{ production_admin_mail }}'
   args:
-    chdir: "{{ production_directory }}"
+    chdir: "~/www/{{ production_directory }}"
 
 - name: Install common plugins to production environment
   command: "wp plugin install {{ item }} --activate"
   args:
-    chdir: "{{ production_directory }}"
+    chdir: "~/www/{{ production_directory }}"
   with_items: "{{ common_plugins }}"
 
 - name: Install staging plugins to production environment
   command: "wp plugin install {{ item }} --activate"
   args:
-    chdir: "{{ production_directory }}"
+    chdir: "~/www/{{ production_directory }}"
   with_items: "{{ production_plugins }}"
 
 - name: Rewrite permalink structure
   command: "wp rewrite flush"
   args:
-    chdir: "{{ production_directory }}"
+    chdir: "~/www/{{ production_directory }}"

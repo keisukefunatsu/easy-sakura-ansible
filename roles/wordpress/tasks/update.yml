@@ -1,0 +1,4 @@
+- name: Install update.sh
+  template:
+    src: update.sh.j2
+    dest: ~/bin/update.sh

@@ -1,0 +1,4 @@
+- name: Install backup.sh
+  template:
+    src: backup.sh.j2
+    dest: ~/bin/backup.sh
