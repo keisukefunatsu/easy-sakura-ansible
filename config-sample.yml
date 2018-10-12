@@ -30,6 +30,8 @@ production_plugins:
 # ステージング環境の設定
 # ステージング環境が必要な場合は true, 必要でない場合はfalse
 is_staging_necessary: true
+# ステージング環境にテストデータをインポートする場合
+staging_test_data: true
 staging_db_name: "db_staging"
 staging_directory: "staging"
 

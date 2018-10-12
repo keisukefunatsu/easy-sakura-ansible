@@ -34,12 +34,6 @@
   args:
     chdir: "~/www/{{ staging_directory }}"
 
-- name: Install WordPress Importer plugin on staging environment
-  command: "wp plugin install wordpress-importer --activate"
-  args:
-    chdir: "~/www/{{ staging_directory }}"
-  when: import_test_data
-
 - name: Install common plugins on staging environment
   command: "wp plugin install {{ item }} --activate"
   args:
