@@ -1,10 +1,10 @@
-- name: Install update.sh
+- name: update.shをインストール
   template:
     src: update.sh.j2
     dest: ~/bin/update.sh
 
 
-- name: Set cron
+- name: update.sh定期実行用のcron設定をする
   cron:
     name: "Update WordPress"
     hour: "{{ cron_hour }}"

@@ -1,15 +1,15 @@
-- name: Create working directory
+- name: ディレクトリを作成する
   file:
     path: "~/www/{{ working_directory }}"
     state: directory
 
-- name: Download WordPress to environment
+- name: WordPress日本語版をダウンロードする
   command: "wp core download --locale=ja"
   args:
     chdir: "~/www/{{ working_directory }}"
     creates: index.php
 
-- name: Set up wp-config.php for environment
+- name: wp-config.phpを作成する
   command: |
     wp config create
     --dbname={{ site_db_name }}
@@ -22,7 +22,7 @@
     chdir: "~/www/{{ working_directory }}"
     creates: wp-config.php
 
-- name: Install WordPress on environment
+- name: WordPressをインストールする
   command: |
     wp core install
     --url='{{ site_url }}'
@@ -33,25 +33,25 @@
   args:
     chdir: "~/www/{{ working_directory }}"
 
-- name: Install common plugins on environment
+- name: 共通プラグインをインストールする
   command: "wp plugin install {{ item }} --activate"
   args:
     chdir: "~/www/{{ working_directory }}"
   with_items: "{{ common_plugins }}"
 
-- name: Install plugins on environment
+- name: 環境独自のプラグインをインストールする
   command: "wp plugin install {{ item }} --activate"
   args:
     chdir: "~/www/{{ working_directory }}"
   with_items: "{{ site_plugins }}"
 
 
-- name: Rewrite permalink structure
+- name: パーマリンク構造を変更
   command: wp rewrite structure '/%postname%/'
   args:
     chdir: "~/www/{{ working_directory }}"
 
-- name: Flush permalink structure
+- name: パーマリンク設定を更新する
   command: wp rewrite flush
   args:
     chdir: "~/www/{{ working_directory }}"

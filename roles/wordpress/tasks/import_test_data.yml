@@ -1,24 +1,24 @@
-- name: Create tmp directory
+- name: tmpディレクトリを作成
   file:
     path: ~/tmp
     state: directory
 
-- name: Download WordPress test data
+- name: WordPressのテストデータをダウンロード
   get_url:
     url: https://raw.githubusercontent.com/jawordpressorg/theme-test-data-ja/master/wordpress-theme-test-date-ja.xml
     dest: ~/tmp/wordpress_test_data.xml
 
-- name: Install WordPress importer plugin to import test data
+- name: テストデータ導入のためにWordPress importer プラグインを導入する
   command: "wp plugin install wordpress-importer --activate"
   args:
     chdir: "~/www/{{ working_directory }}"
 
-- name: Import WordPress test data
+- name: WordPress test dataをインポートする
   command: "wp import ~/tmp/wordpress_test_data.xml --authors=create"
   args:
     chdir: "~/www/{{ working_directory }}"
 
-- name: Delete test data
+- name: ダウンロードしたテストデータを削除する
   file:
     path: ~/tmp/wordpress_test_data.xml
     state: absent

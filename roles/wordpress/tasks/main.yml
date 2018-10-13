@@ -1,7 +1,7 @@
-- name: Set up WP-CLI
+- name: WP-CLIをセットアップする
   import_tasks: wp-cli.yml
 
-- name: Set up Production
+- name: 本番環境を作成する
   import_tasks: setup.yml
   vars:
     working_directory: "{{ production_directory }}"
@@ -15,7 +15,7 @@
     site_plugins: "{{ production_plugins }}"
     extra_php: "define( 'DISALLOW_FILE_EDIT',true );"
 
-- name: Set up Staging
+- name: ステージング環境を作成する
   import_tasks: setup.yml
   vars:
     working_directory: "{{ staging_directory }}"
@@ -33,20 +33,20 @@
       define( 'DISALLOW_FILE_EDIT',true );
   when: staging_necessary
 
-- name: Import test data to staging
+- name: テストデータをステージング環境に導入する
   import_tasks: import_test_data.yml
   vars:
     working_directory: "{{ staging_directory }}"
   when: staging_test_data
 
-- name: Set up backup job
+- name: バックアップスクリプトをインストール、設定する
   import_tasks: backup.yml
   vars:
     working_directories:
       - "{{ production_directory }}"
       - "{{ staging_directory }}"
 
-- name: Set up update job
+- name: アップデートスクリプトをインストール、設定する
   import_tasks: update.yml
   vars:
     working_directories:
