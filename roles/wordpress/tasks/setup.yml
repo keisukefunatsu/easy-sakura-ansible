@@ -1,4 +1,4 @@
-- name: ディレクトリを作成する
+- name: 環境毎にディレクトリを作成する
   file:
     path: "~/www/{{ working_directory }}"
     state: directory

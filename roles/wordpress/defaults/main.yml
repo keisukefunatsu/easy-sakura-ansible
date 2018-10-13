@@ -18,7 +18,7 @@ production_title: "WordPress　demo site production"
 production_plugins: []
 # ステージング環境の設定
 # ステージング環境が必要な場合は true, 必要でない場合はfalse
-is_staging_necessary: true
+staging_necessary: true
 staging_db_name: "db_staging"
 staging_directory: "staging"
 # 以下はWordPressの設定項目
