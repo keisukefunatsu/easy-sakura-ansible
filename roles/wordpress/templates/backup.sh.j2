@@ -5,19 +5,20 @@ BACKUP_DATE=$(date +"%Y%m%d")
 BACKUP_TIME=$(date +"%H%M%S")
 BACKUP_DATETIME="${BACKUP_DATE}_${BACKUP_TIME}"
 
+{% for directory in working_directories %}
 # 階層的にbackupフォルダを作成
-mkdir -p ${BACKUP_DIR}/"{{production_directory}}"
-mkdir -p ${BACKUP_DIR}/"{{staging_directory}}"
+mkdir -p ${BACKUP_DIR}/"{{ directory }}"
 # backup用のディレクトリがなければ終了
-cd ${BACKUP_DIR}/"{{production_directory}}" || exit 1;
-cd ${BACKUP_DIR}/"{{staging_directory}}" || exit 1;
+cd ${BACKUP_DIR}/"{{ directory }}" || exit 1;
 
-# productionディレクトリがあれば処理をする
-cd /home/"{{sakura_user_name}}"/www/"{{production_directory}}" || exit 1;
-wp db export ${BACKUP_DIR}/production/back_up${BACKUP_DATETIME}.sql
-find ${BACKUP_DIR}/"{{production_directory}}" -type f -name "*.sql" -mtime +5 -print0 | xargs rm -f
+# ディレクトリがあれば処理をする
+cd /home/"{{ sakura_user_name }}"/www/"{{ directory }}" || exit 1;
+# DBをバックアップする
+wp db export ${BACKUP_DIR}/"{{ directory }}"/back_up${BACKUP_DATETIME}.sql
+# 5日前のバックアップを削除
+find ${BACKUP_DIR}/"{{ directory }}" -type f -name "*.sql" -mtime +5 -print0 | xargs rm -f
 
-# stagingディレクトリがあれば処理をする
-cd /home/"{{sakura_user_name}}"/www/"{{staging_directory}}" || exit 1;
-wp db export ${BACKUP_DIR}/staging/back_up${BACKUP_DATETIME}.sql
-find ${BACKUP_DIR}/"{{staging_directory}}" -type f -name "*.sql" -mtime +5 -print0 | xargs rm -f
+# uploadsの中身をバックアップする
+tar vcfz ${BACKUP_DIR}/"{{ directory }}"/uploads_${BACKUP_DATETIME}.tar.gz ${HOME}/www/"{{ directory }}"/*
+find ${BACKUP_DIR}/"{{ directory }}" -type f -name "*.tar.gz" -mtime +5 -print0 | xargs rm -f
+{% endfor %}

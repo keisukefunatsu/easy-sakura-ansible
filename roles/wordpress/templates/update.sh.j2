@@ -1,18 +1,10 @@
 #!/usr/bin/env bash
 
-# production環境のアップデート
-cd ${HOME}/www/"{{production_directory}}" || exit 1;
+{% for directory in working_directories %}
+cd ${HOME}/www/"{{ directory }}" || exit 1;
 wp core update --locale=ja
 wp core language update
 wp core verify-checksums
 wp plugin update --all
 wp theme update --all
-
-
-# staging環境のアップデート
-cd ${HOME}/www/"{{staging_directory}}" || exit 1;
-wp core update --locale=ja
-wp core language update
-wp core verify-checksums
-wp plugin update --all
-wp theme update --all
+{% endfor %}
