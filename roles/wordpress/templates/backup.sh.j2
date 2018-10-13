@@ -12,13 +12,14 @@ mkdir -p ${BACKUP_DIR}/"{{ directory }}"
 cd ${BACKUP_DIR}/"{{ directory }}" || exit 1;
 
 # ディレクトリがあれば処理をする
-cd /home/"{{ sakura_user_name }}"/www/"{{ directory }}" || exit 1;
+cd ${HOME}/www/"{{ directory }}" || exit 1;
 # DBをバックアップする
-wp db export ${BACKUP_DIR}/"{{ directory }}"/back_up${BACKUP_DATETIME}.sql
+wp db export ${BACKUP_DIR}/"{{ directory }}"/backup_${BACKUP_DATETIME}.sql
 # 5日前のバックアップを削除
 find ${BACKUP_DIR}/"{{ directory }}" -type f -name "*.sql" -mtime +5 -print0 | xargs rm -f
 
 # uploadsの中身をバックアップする
-tar vcfz ${BACKUP_DIR}/"{{ directory }}"/uploads_${BACKUP_DATETIME}.tar.gz ${HOME}/www/"{{ directory }}"/*
+cd ${HOME}/www/"{{ directory }}/wp-content" || exit 1;
+tar vcfz ${BACKUP_DIR}/"{{ directory }}"/uploads_${BACKUP_DATETIME}.tar.gz ./uploads/*
 find ${BACKUP_DIR}/"{{ directory }}" -type f -name "*.tar.gz" -mtime +5 -print0 | xargs rm -f
 {% endfor %}

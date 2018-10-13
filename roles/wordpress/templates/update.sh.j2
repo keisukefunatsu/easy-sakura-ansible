@@ -4,7 +4,6 @@
 cd ${HOME}/www/"{{ directory }}" || exit 1;
 wp core update --locale=ja
 wp core language update
-wp core verify-checksums
 wp plugin update --all
 wp theme update --all
 {% endfor %}
