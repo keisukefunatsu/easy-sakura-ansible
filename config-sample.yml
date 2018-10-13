@@ -6,8 +6,8 @@ sakura_db_host: "mysqlxxx.db.sakura.ne.jp"
 sakura_db_user: "enter_sakura_db_user"
 sakura_db_pass: "enter_sakura_db_pass"
 
-# cronの実行時間を設定（オプション）
-# この設定の場合
+# cronの実行時間を設定
+# この設定の場合、毎日0:30に実行される
 cron_hour: 0
 cron_minute: 30
 # cronを設定する場合はtrue 必要ない場合はfalse
@@ -16,7 +16,7 @@ cron_enable: true
 # 本番環境の設定
 production_directory: "production"
 production_db_name: "db_production"
-# オプション
+# データベースの接頭辞（オプション）、デフォルトはwp_
 production_db_prefix: "wp_pro_"
 
 
@@ -32,12 +32,12 @@ production_plugins:
 
 # ステージング環境の設定
 # ステージング環境が必要な場合は true, 必要でない場合はfalse
-is_staging_necessary: true
+staging_necessary: true
 # ステージング環境にテストデータをインポートする場合
 staging_test_data: true
 staging_directory: "staging"
 staging_db_name: "db_staging"
-# オプション
+# データベースの接頭辞（オプション）、デフォルトはwp_
 staging_db_prefix: "wp_stg_"
 
 # 以下はWordPressの設定項目
