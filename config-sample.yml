@@ -3,6 +3,7 @@
 sakura_ssh_pass: "enter-ftp_pass"
 sakura_host_name: "username.sakura.ne.jp"
 sakura_user_name: "enter_sakura_user_name"
+
 # データベース作成時に設定した値を入力します。
 sakura_db_host: "mysqlxxx.db.sakura.ne.jp"
 sakura_db_user: "enter_sakura_db_user"
@@ -29,7 +30,7 @@ wordpress_info:
     # 管理者のユーザ名
     admin_user_name: "enter_admin_name"
     # 管理者のパスワード
-    admin_password: "enter_password"
+    admin_password: "enter_admin_password"
     # 管理者のメールアドレス
     admin_mail: "test@example.com"
     # サイトのURL
@@ -53,7 +54,7 @@ wordpress_info:
   #   db_name: "user_name_staging"
   #   db_prefix: "wp_staging_"
   #   admin_user_name: "enter_admin_name"
-  #   admin_password: "enter_password"
+  #   admin_password: "enter_admin_password"
   #   admin_mail: "test@example.com"
   #   site_url: "http://user_name.sakura.ne.jp/staging"
   #   site_title: "WordPress　demo site staging"
@@ -68,4 +69,16 @@ wordpress_info:
 
 
 # 本番、ステージング両方の環境に入るプラグイン
-common_plugins: []
+common_plugins:
+  - all-in-one-wp-security-and-firewall
+  - contact-form-7
+  - flamingo
+  - cf7-invisible-recaptcha
+  - tinymce-advanced
+  - wp-mail-smtp
+  - wp-multibyte-patch
+  - wp-total-hacks
+  - broken-link-checker
+  - all-in-one-wp-migration
+  - sakura-rs-wp-ssl
+  - all-in-one-seo-pack

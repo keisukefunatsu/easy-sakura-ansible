@@ -20,9 +20,11 @@ windows 版はこちら
 - WP-CLIが使えるようになります。
 - 本番環境、ステージング環境を作成でき、ともにディレクトリはwww以下に作られます。
 - バックアップ、アップデートスクリプトの設置、cron設定が可能です。
+  - バックアップはDB,`wp-content/uploads`以下のファイルに対して行います。
+  - アップデートはコア、言語ファイル、テーマ、プラグインに対して実行されます。
 - テストデータの挿入が可能です。
 - 予め決めておいたプラグインを構築と同時に導入できます。
-  - プラグインは本番環境、ステージング環境、両方に共通のものの３種類に分けて設定することができます。
+  - プラグインは各環境毎に独自のもの、どの環境にも共通のものに分けて設定することができます。
 - 変数はconfig.ymlを別途作成して記入します。config-sample.ymlをリネームするなどして使ってください。
 
 
@@ -79,12 +81,14 @@ config-sample.yml を config.yml にリネームして使用してください�
 - `site_title`:　本番環境のサイトタイトルを設定します。　例） "WordPress　demo site production"
 - `extra_php` : wp-config.phpを作成する際に追記するphpを記入します。
 例)
+
 ```
 extra_php: |
   define( 'WP_DEBUG', true );
   define( 'WP_DEBUG_LOG', true );
   define( 'DISALLOW_FILE_EDIT',true );
 ```
+
 - `test_data`: テストデータが必要な場合はtrue, 必要ない場合はfalse 例）true
 - `plugins`: 本番環境のプラグイン（複数指定可能）を設定します。
 

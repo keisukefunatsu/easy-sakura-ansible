@@ -7,21 +7,21 @@ BACKUP_DATETIME="${BACKUP_DATE}_${BACKUP_TIME}"
 
 {% for item in wordpress_info %}
 
-# 階層的にbackupフォルダを作成
-mkdir -p ${BACKUP_DIR}/{{ item.directory }}
-# backup用のディレクトリがなければ終了
-cd ${BACKUP_DIR}/{{ item.directory }} || exit 1;
+  # 階層的にbackupフォルダを作成
+  mkdir -p ${BACKUP_DIR}/{{ item.directory }}
+  # backup用のディレクトリがなければ終了
+  cd ${BACKUP_DIR}/{{ item.directory }} || exit 1;
 
-# ディレクトリがあれば処理をする
-cd ${HOME}/www/{{ item.directory }} || exit 1;
-# DBをバックアップする
-wp db export ${BACKUP_DIR}/{{ item.directory }}/backup_${BACKUP_DATETIME}.sql
-# 5日前のバックアップを削除
-find ${BACKUP_DIR}/{{ item.directory }} -type f -name "*.sql" -mtime +5 -print0 | xargs rm -f
+  # ディレクトリがあれば処理をする
+  cd ${HOME}/www/{{ item.directory }} || exit 1;
+  # DBをバックアップする
+  wp db export ${BACKUP_DIR}/{{ item.directory }}/backup_${BACKUP_DATETIME}.sql
+  # 5日前のバックアップを削除
+  find ${BACKUP_DIR}/{{ item.directory }} -type f -name "*.sql" -mtime +5 -print0 | xargs rm -f
 
-# uploadsの中身をバックアップする
-cd ${HOME}/www/{{ item.directory }}/wp-content || exit 1;
-tar vcfz ${BACKUP_DIR}/{{ item.directory }}/uploads_${BACKUP_DATETIME}.tar.gz ./uploads/*
-find ${BACKUP_DIR}/{{ item.directory }} -type f -name "*.tar.gz" -mtime +5 -print0 | xargs rm -f
+  # uploadsの中身をバックアップする
+  cd ${HOME}/www/{{ item.directory }}/wp-content || exit 1;
+  tar vcfz ${BACKUP_DIR}/{{ item.directory }}/uploads_${BACKUP_DATETIME}.tar.gz ./uploads/*
+  find ${BACKUP_DIR}/{{ item.directory }} -type f -name "*.tar.gz" -mtime +5 -print0 | xargs rm -f
 
 {% endfor %}

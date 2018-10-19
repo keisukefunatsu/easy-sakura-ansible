@@ -21,22 +21,20 @@ wordpress_info:
     db_name: "user_name_production"
     db_prefix: "wp_production_"
     admin_user_name: "enter_admin_name"
-    admin_password: "enter_password"
+    admin_password: "enter_admin_password"
     admin_mail: "test@example.com"
     site_url: "http://user_name.sakura.ne.jp/production"
     site_title: "WordPress　demo site production"
     extra_php: "define( 'DISALLOW_FILE_EDIT',true );"
     test_data: false
-    plugins:
-      - google-sitemap-generator
-      - walti
+    plugins: []
 
   # - setting_name: "ステージング環境"
   #   directory: "staging"
   #   db_name: "user_name_staging"
   #   db_prefix: "wp_staging_"
   #   admin_user_name: "enter_admin_name"
-  #   admin_password: "enter_password"
+  #   admin_password: "enter_admin_password"
   #   admin_mail: "test@example.com"
   #   site_url: "http://user_name.sakura.ne.jp/staging"
   #   site_title: "WordPress　demo site staging"
