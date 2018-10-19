@@ -8,7 +8,7 @@
 - name: テストデータを導入する
   include_tasks: import_test_data.yml
   with_items: "{{ wordpress_info }}"
-  when: "{{ item.test_data }}"
+  when: item.test_data
 
 - name: Cron用のPATHを設定する
   cronvar:
