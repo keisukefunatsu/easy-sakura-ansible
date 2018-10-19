@@ -64,33 +64,29 @@ config-sample.yml を config.yml にリネームして使用してください�
 - `cron_minute`: cronの実行時間の分数を設定します。例）30
 - `cron_enable`: cronを設定する場合はtrue 必要ない場合はfalse
 
-- `production_directory`: 本番環境のディレクトリ名、~/www以下に作成されます　例）"production"
-- `production_db_name`: 本番環境のデータベース名
-- `production_db_prefix`: データベースの接頭辞（オプション）、デフォルトはwp_　例）"wp_pro_"
+**WordPressの設定は wordpress_info以下に辞書形式で書いていきます**
+**詳しくはconfig-sample.ymlを参照してください**
+- `directory`: 本番環境のディレクトリ名、~/www以下に作成されます　例）"production"
+- `db_name`: 本番環境のデータベース名
+- `db_prefix`: データベースの接頭辞（オプション）、デフォルトはwp_　例）"wp_pro_"
 
 
 **以下はWordPressの設定項目**
-- `production_admin_name`: 本番環境の管理者ユーザ名を設定します。
-- `production_admin_pass`: 本番環境の管理者のパスワードを設定します。
-- `production_admin_mail`: 本番環境の管理者のメールアドレスを設定します。　例）test@example.com
-- `production_url`: 本番環境のURLを設定します。　例）"https://easy-ansible-sakura.tk/"
-- `production_title`:　本番環境のサイトタイトルを設定します。　例） "WordPress　demo site production"
-- `production_plugins`: 本番環境のプラグイン（複数指定可能）を設定します。
-
-**ステージング環境の設定**
-- `staging_necessary`: ステージング環境が必要な場合は true, 必要でない場合はfalse
-- `staging_test_data`: true ステージング環境にテストデータをインポートする場合はtrue、いらない場合- はfalse
-- `staging_directory`: ステージング環境のディレクトリ名、~/www以下に作成されます 例）"staging"
-- `staging_db_name`: ステージング環境用のデータベースの名前を設定します。
-- `staging_db_prefix`: データベースの接頭辞（オプション）を設定します。、デフォルトはwp_　例）"wp_stg_"
-
-**以下はWordPressの設定項目**
-- `staging_admin_name`: ステージング環境の管理者ユーザ名を設定します。
-- `staging_admin_pass`: ステージング環境の管理者のパスワードを設定します。
-- `staging_admin_mail`: ステージング環境の管理者のメールアドレスを設定します。　例）test@example.com
-- `staging_url`: ステージング環境のサイトURLを設定します。　例）"http://xxxx.sakura.ne.jp/staging"
-- `staging_title`:　ステージング環境のサイトタイトルを設定します。　例） "WordPress　demo site - staging"
-- `staging_plugins`:　ステージング環境のプラグイン（複数指定可能）を設定します。
+- `admin_user_name`: 本番環境の管理者ユーザ名を設定します。
+- `admin_password`: 本番環境の管理者のパスワードを設定します。
+- `admin_mail`: 本番環境の管理者のメールアドレスを設定します。　例）test@example.com
+- `site_url`: 本番環境のURLを設定します。　例）"https://easy-ansible-sakura.tk/"
+- `site_title`:　本番環境のサイトタイトルを設定します。　例） "WordPress　demo site production"
+- `extra_php` : wp-config.phpを作成する際に追記するphpを記入します。
+例)
+```
+extra_php: |
+  define( 'WP_DEBUG', true );
+  define( 'WP_DEBUG_LOG', true );
+  define( 'DISALLOW_FILE_EDIT',true );
+```
+- `test_data`: テストデータが必要な場合はtrue, 必要ない場合はfalse 例）true
+- `plugins`: 本番環境のプラグイン（複数指定可能）を設定します。
 
 **以下は共通設定の項目**
 - `common_plugins`:　本番、ステージング両方の環境に入るプラグインを設定します。（複数指定可能）
