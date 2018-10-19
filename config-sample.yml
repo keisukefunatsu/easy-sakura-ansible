@@ -15,7 +15,7 @@ cron_enable: true
 
 # 本番環境の設定
 production_directory: "production"
-production_db_name: "db_production"
+production_db_name: "user_name_production"
 # データベースの接頭辞（オプション）、デフォルトはwp_
 production_db_prefix: "wp_pro_"
 
@@ -24,7 +24,7 @@ production_db_prefix: "wp_pro_"
 production_admin_name: "enter_strong_admin_name"
 production_admin_pass: "enter_strong_admin_pass"
 production_admin_mail: "test@example.com"
-production_url: "https://easy-ansible-sakura.tk/"
+production_url: "http://xxxx.sakura.ne.jp/production"
 production_title: "WordPress　demo site production"
 production_plugins:
   - google-sitemap-generator
@@ -32,11 +32,11 @@ production_plugins:
 
 # ステージング環境の設定
 # ステージング環境が必要な場合は true, 必要でない場合はfalse
-staging_necessary: true
+staging_necessary: false
 # ステージング環境にテストデータをインポートする場合
 staging_test_data: true
 staging_directory: "staging"
-staging_db_name: "db_staging"
+staging_db_name: "user_name_staging"
 # データベースの接頭辞（オプション）、デフォルトはwp_
 staging_db_prefix: "wp_stg_"
 

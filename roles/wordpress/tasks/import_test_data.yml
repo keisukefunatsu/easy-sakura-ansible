@@ -11,12 +11,12 @@
 - name: テストデータ導入のためにWordPress importer プラグインを導入する
   command: "wp plugin install wordpress-importer --activate"
   args:
-    chdir: "~/www/{{ working_directory }}"
+    chdir: "~/www/{{ item.directory }}"
 
 - name: WordPress test dataをインポートする
   command: "wp import ~/tmp/wordpress_test_data.xml --authors=create"
   args:
-    chdir: "~/www/{{ working_directory }}"
+    chdir: "~/www/{{ item.directory }}"
 
 - name: ダウンロードしたテストデータを削除する
   file:

@@ -1,57 +1,54 @@
+- name: どの環境を作成するか表示
+  debug:
+    msg: "{{ item.setting_name }}を作成します"
+
 - name: 環境毎にディレクトリを作成する
   file:
-    path: "~/www/{{ working_directory }}"
+    path: "~/www/{{ item.directory }}"
     state: directory
 
 - name: WordPress日本語版をダウンロードする
   command: "wp core download --locale=ja"
   args:
-    chdir: "~/www/{{ working_directory }}"
+    chdir: "~/www/{{ item.directory }}"
     creates: index.php
 
 - name: wp-config.phpを作成する
   command: |
     wp config create
-    --dbname={{ site_db_name }}
+    --dbname={{ item.db_name }}
     --dbuser={{ sakura_db_user }}
     --dbpass={{ sakura_db_pass }}
     --dbhost={{ sakura_db_host }}
-    --dbprefix={{ site_db_prefix | default('wp_') }}
-    --extra-php="{{ extra_php }}"
+    --dbprefix={{ item.db_prefix | default('wp_') }}
+    --extra-php="{{ item.extra_php }}"
   args:
-    chdir: "~/www/{{ working_directory }}"
+    chdir: "~/www/{{ item.directory }}"
     creates: wp-config.php
 
 - name: WordPressをインストールする
   command: |
     wp core install
-    --url='{{ site_url }}'
-    --title='{{ site_title }}'
-    --admin_user='{{ site_admin_name }}'
-    --admin_password='{{ site_admin_pass }}'
-    --admin_email='{{ site_admin_mail }}'
+    --url='{{ item.site_url }}'
+    --title='{{ item.site_title }}'
+    --admin_user='{{ item.admin_user_name }}'
+    --admin_password='{{ item.admin_password }}'
+    --admin_email='{{ item.admin_mail }}'
   args:
-    chdir: "~/www/{{ working_directory }}"
+    chdir: "~/www/{{ item.directory }}"
 
-- name: 共通プラグインをインストールする
-  command: "wp plugin install {{ item }} --activate"
-  args:
-    chdir: "~/www/{{ working_directory }}"
-  with_items: "{{ common_plugins }}"
-
-- name: 環境独自のプラグインをインストールする
-  command: "wp plugin install {{ item }} --activate"
-  args:
-    chdir: "~/www/{{ working_directory }}"
-  with_items: "{{ site_plugins }}"
-
+- name: プラグインをインストールする
+  include_tasks: plugins.yml
+  vars:
+    working_directory: "{{ item.directory }}"
+    plugins: "{{ item.plugins }}"
 
 - name: パーマリンク構造を変更
   command: wp rewrite structure '/%postname%/'
   args:
-    chdir: "~/www/{{ working_directory }}"
+    chdir: "~/www/{{ item.directory }}"
 
 - name: パーマリンク設定を更新する
   command: wp rewrite flush
   args:
-    chdir: "~/www/{{ working_directory }}"
+    chdir: "~/www/{{ item.directory }}"

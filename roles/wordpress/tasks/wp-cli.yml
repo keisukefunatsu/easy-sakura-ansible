@@ -25,5 +25,5 @@
 - name: wp-cliのコンフィグファイルを作成（作るだけ）
   file:
     path: ~/.wp-cli/config.yml
-    state: file
+    state: touch
     mode: "755"

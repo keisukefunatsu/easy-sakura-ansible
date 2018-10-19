@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-{% for directory in working_directories %}
-cd ${HOME}/www/"{{ directory }}" || exit 1;
+{% for item in wordpress_info %}
+cd ${HOME}/www/{{ item.directory }} || exit 1;
 wp core update --locale=ja
 wp core language update
 wp plugin update --all

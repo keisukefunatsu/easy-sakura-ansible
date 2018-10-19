@@ -2,6 +2,7 @@
   template:
     src: backup.sh.j2
     dest: ~/bin/backup.sh
+    mode: '755'
 
 
 - name: backup.sh自動実行用のcronを設定する
