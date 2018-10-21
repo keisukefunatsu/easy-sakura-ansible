@@ -1,3 +1,10 @@
+- name: テストデータで作成されたユーザが存在しているかチェックしてresultに格納
+  shell: wp user list | grep miya@example.com
+  args:
+    chdir: "~/www/{{ item.directory }}"
+  register: result
+  failed_when: result.rc not in [0, 1]
+
 - name: tmpディレクトリを作成
   file:
     path: ~/tmp
@@ -17,8 +24,9 @@
   command: "wp import ~/tmp/wordpress_test_data.xml --authors=create"
   args:
     chdir: "~/www/{{ item.directory }}"
+  when: result.rc == 1
 
-- name: ダウンロードしたテストデータを削除する
-  file:
-    path: ~/tmp/wordpress_test_data.xml
-    state: absent
+# - name: ダウンロードしたテストデータを削除する
+#   file:
+#     path: ~/tmp/wordpress_test_data.xml
+#     state: absent

@@ -46,8 +46,7 @@ wordpress_info:
     test_data: false
     # 環境にいれるプラグインを設定
     plugins:
-      - google-sitemap-generator
-      - walti
+      - show-current-template
 
   # - setting_name: "ステージング環境"
   #   directory: "staging"
@@ -70,15 +69,24 @@ wordpress_info:
 
 # 本番、ステージング両方の環境に入るプラグイン
 common_plugins:
+  # セキュリティ関連
   - all-in-one-wp-security-and-firewall
+  - walti
+  # 問い合わせ関連
   - contact-form-7
   - flamingo
   - cf7-invisible-recaptcha
-  - tinymce-advanced
   - wp-mail-smtp
+  # SEO関連
+  - google-sitemap-generator
+  - all-in-one-seo-pack
+  - tinymce-advanced
+  # その他おすすめ
   - wp-multibyte-patch
   - wp-total-hacks
   - broken-link-checker
   - all-in-one-wp-migration
   - sakura-rs-wp-ssl
-  - all-in-one-seo-pack
+
+  # 動作未確認だが有用そう
+  # - ip-geo-block
