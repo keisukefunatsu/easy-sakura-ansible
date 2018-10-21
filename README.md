@@ -58,8 +58,7 @@ config-sample.yml を config.yml にリネームして使用してください�
 - `sakura_host_name`: ホスト名を設定します。　例）"username.sakura.ne.jp"
 - `sakura_user_name`: さくらレンタルサーバーのユーザ名を設定します。
 - `sakura_db_host`:　作成したデータベースホストを設定します。　例）"mysqlxxx.db.sakura.ne.jp"
-- `sakura_db_user`: 作成したデータベースのユーザ名を設定します。　
-- `sakura_db_pass`: 作成したデータベースのパスワードを設定します。
+- `sakura_db_password`: 作成したデータベースのパスワードを設定します。
 
 **この設定の場合、毎日0:30に実行される**
 - `cron_hour`: cronの実行時間を設定します。例）0
@@ -68,8 +67,8 @@ config-sample.yml を config.yml にリネームして使用してください�
 
 **WordPressの設定は wordpress_info以下に辞書形式で書いていきます**
 **詳しくはconfig-sample.ymlを参照してください**
-- `directory`: 本番環境のディレクトリ名、~/www以下に作成されます　例）"production"
-- `db_name`: 本番環境のデータベース名
+- `directory`: ディレクトリ名、~/www以下に作成されます　例）"production"
+- `db_name`: データベース名 例）user-name_production
 - `db_prefix`: データベースの接頭辞（オプション）、デフォルトはwp_　例）"wp_pro_"
 
 

@@ -17,8 +17,8 @@
   command: |
     wp config create
     --dbname={{ item.db_name }}
-    --dbuser={{ sakura_db_user }}
-    --dbpass={{ sakura_db_pass }}
+    --dbuser={{ sakura_user_name }}
+    --dbpass={{ sakura_db_password }}
     --dbhost={{ sakura_db_host }}
     --dbprefix={{ item.db_prefix | default('wp_') }}
     --extra-php="{{ item.extra_php }}"

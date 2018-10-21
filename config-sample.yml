@@ -6,8 +6,7 @@ sakura_user_name: "enter_sakura_user_name"
 
 # データベース作成時に設定した値を入力します。
 sakura_db_host: "mysqlxxx.db.sakura.ne.jp"
-sakura_db_user: "enter_sakura_db_user"
-sakura_db_pass: "enter_sakura_db_pass"
+sakura_db_password: "enter_sakura_db_password"
 
 # cronの実行時間を設定
 # この設定の場合、毎日0:30に実行される
