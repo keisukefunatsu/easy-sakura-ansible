@@ -81,8 +81,8 @@ common_plugins:
   # SEO関連
   - google-sitemap-generator
   - all-in-one-seo-pack
-  - tinymce-advanced
   # その他おすすめ
+  - tinymce-advanced
   - wp-multibyte-patch
   - wp-total-hacks
   - broken-link-checker
