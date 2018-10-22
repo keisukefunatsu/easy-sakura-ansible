@@ -27,6 +27,7 @@ wordpress_info:
     site_title: "WordPress　demo site production"
     extra_php: "define( 'DISALLOW_FILE_EDIT',true );"
     test_data: false
+    search_replace: false
     plugins: []
 
   # - setting_name: "ステージング環境"

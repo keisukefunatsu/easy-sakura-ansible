@@ -43,6 +43,8 @@ wordpress_info:
       define( 'DISALLOW_FILE_EDIT',true );
     # テストデータを挿入する場合は true そうでない場合はfalse
     test_data: false
+    # サイトURLを変更した際にwp search-replaceを実行する場合はtrue、しない場合はfalse
+    search_replace: false
     # 環境にいれるプラグインを設定
     plugins:
       - show-current-template

@@ -43,12 +43,24 @@
     working_directory: "{{ item.directory }}"
     plugins: "{{ item.plugins }}"
 
-- name: パーマリンク構造を変更
-  command: wp rewrite structure '/%postname%/'
+- name: 現在のサイトURLを取得して格納する
+  command: wp option get siteurl
   args:
     chdir: "~/www/{{ item.directory }}"
+  register: old_site_url
+
+- name: config.ymlのサイトURLが取得したものと異なっていれば置換する
+  command: "wp search-replace {{ old_site_url.stdout }} {{ item.site_url }}"
+  args:
+    chdir: "~/www/{{ item.directory }}"
+  when: old_site_url.stdout != item.site_url and old_site_url.rc == 0 and item.search_replace
 
 - name: パーマリンク設定を更新する
   command: wp rewrite flush
+  args:
+    chdir: "~/www/{{ item.directory }}"
+    
+- name: パーマリンク構造を変更
+  command: wp rewrite structure '/%postname%/'
   args:
     chdir: "~/www/{{ item.directory }}"
