@@ -18,7 +18,7 @@ cron_enable: true
 # WordPressの変数を設定
 # 辞書配列として同様に設定を追加していけばサイトが作成されます。
 wordpress_info:
-    # 環境名など
+  # 環境名など
   - setting_name: "本番環境"
     # WordPressをインストールするディレクトリ
     directory: "production"
@@ -43,8 +43,6 @@ wordpress_info:
       define( 'DISALLOW_FILE_EDIT',true );
     # テストデータを挿入する場合は true そうでない場合はfalse
     test_data: false
-    # サイトURLを変更した際にwp search-replaceを実行する場合はtrue、しない場合はfalse
-    search_replace: false
     # 環境にいれるプラグインを設定
     plugins:
       - show-current-template
@@ -66,8 +64,6 @@ wordpress_info:
   #   plugins:
   #     - show-current-template
 
-
-
 # 本番、ステージング両方の環境に入るプラグイン
 common_plugins:
   # セキュリティ関連
@@ -88,6 +84,4 @@ common_plugins:
   - broken-link-checker
   - all-in-one-wp-migration
   - sakura-rs-wp-ssl
-
-  # 動作未確認だが有用そう
-  # - ip-geo-block
+  - ip-geo-block
